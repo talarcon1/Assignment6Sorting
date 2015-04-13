@@ -94,17 +94,17 @@ public class Sorter
         return count;
     }
 
-    public int shell( int n )
+    public int shellMy( int n )
     {
         int count = 0;
         intArray = createListRand(n);
-    
+
         for( int gap = intArray.length / 2; gap > 0; gap /= 2 )
         {
             for(int j = 0; j < gap; j++){
                 for( int i = j; i < intArray.length; i+= gap)
                 {
-                    if(i + gap <= n%gap){
+                    if(i + gap <= n-1){
                         count++;
                         if(intArray[i] > intArray[i+gap] ){
                             swap(intArray,i,i+gap);
@@ -116,24 +116,42 @@ public class Sorter
         return count;
     }
 
-    public int shellOld1( int n )
+    //     public void shellBook( T [ ] a )
+    //     {
+    //         int j;
+    //         for( int gap = a.length / 2; gap > 0; gap /= 2 )
+    //         {
+    //             for( int i = gap; i < a.length; i++ )
+    //             {
+    //                 T tmp = a[ i ];
+    //                 for( j = i; j >= gap && tmp.compareTo( a[ j - gap ] ) < 0; j -= gap )
+    //                 {
+    //                     a[ j ] = a[ j - gap ];
+    //                 }
+    //                 a[ j ] = tmp;
+    //             }
+    //         }
+    //     }
+    /**
+     * working where count?
+     */
+    public int shell( int n )
     {
+        intArray = createListOrd(n);
         int count = 0;
         int j;
-        intArray = createListOrd(n);
         for( int gap = intArray.length / 2; gap > 0; gap /= 2 )
         {
-            count++;
             for( int i = gap; i < intArray.length; i++ )
             {
-                int tmp = intArray[ i ];
-
-                for( j = i; j >= gap && tmp < intArray[ j - gap ]; j -= gap )
+                int temp = intArray[i];
+                for( j = i; j >= gap && temp<intArray[j-gap]; j -= gap )
                 {
-                    intArray[ j ] = intArray[ j - gap ];
-                    count ++;
+                    
+                    intArray[j] = intArray[j - gap];
                 }
-                intArray[ j ] = tmp;
+                count++;
+                intArray[j] = temp;
             }
         }
         return count;
