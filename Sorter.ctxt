@@ -1,0 +1,21 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Sorter()
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ SortingAlgorithm\r\n
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment2.params=n
+comment2.target=int\ selection(int)
+comment2.text=\r\n\ selection\ method\r\n\ @ret\ returns\ number\ of\ comparisons\r\n\ @param\ amount\ of\ random\ entries\r\n
+comment3.params=intArray\ indexA\ indexB
+comment3.target=int[]\ swap(int[],\ int,\ int)
+comment3.text=\r\n\ method\ to\ swap\ a\ and\ b\r\n
+comment4.params=n
+comment4.target=int[]\ createList(int)
+comment5.params=n
+comment5.target=int\ insertion(int)
+comment6.params=n
+comment6.target=void\ testSelection(int)
+comment7.params=n
+comment7.target=void\ testInsertion(int)
+numComments=8
