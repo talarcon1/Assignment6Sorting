@@ -35,7 +35,7 @@ public class Sorter
         System.out.println("N       selection       insertion       Shell       Hibbard       Knuth       Gonnet       Sedgewick       heap       merge       quick");
         //int sorted = s.selection(1000);
 
-        System.out.println("1,000   " + s.selection(1000));
+        System.out.println("1,000      " + s.selection(1000) + "           " + s.insertion(1000));
         System.out.println("2,000   " + s.selection(2000));
         System.out.println("3,000   " + s.selection(3000));
         System.out.println("4,000   " + s.selection(4000));
@@ -97,16 +97,16 @@ public class Sorter
     public int insertion(int n){
         intArray = createList(n);
         int count = 0;
-        int x = intArray[0]; 
         for (int i = 1; i < n; i++) {             
             int j = i; 
-            while (j > 0 && intArray[j] < x )  {
-                swap(intArray,j,j-1);
-                //intArray[j] = intArray[j-1];
-                j--; //problem index of j is changing 
+            while (j > 0 && intArray[j] < intArray[j-1])  {
+                swap(intArray,j-1,j);
+                j--;
                 count++;
             } 
-            x = intArray[j]; 
+            if(j>0){
+                count++;
+            }
         } 
         return count;
     }
