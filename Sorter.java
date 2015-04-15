@@ -145,9 +145,12 @@ public class Sorter
             for( int i = gap; i < intArray.length; i++ )
             {
                 int temp = intArray[i];
+                count++;
                 for( j = i; j >= gap && temp<intArray[j-gap]; j -= gap )
                 {
-                    
+                    if(j!=i){
+                        count++;
+                    }
                     intArray[j] = intArray[j - gap];
                 }
                 count++;
@@ -182,7 +185,61 @@ public class Sorter
         }
         return count;
     }
+    private static int e;
+    private static int c;
+    /**
+     * heap sort
+     * uses heapify method to create heap, maxheap to swap largest in heap
+     * @param n = number of elements
+     * @ret count = number of comparisons
+     */
+    public int heap(int n){
+        c = 0;
+        intArray = createListRand(n);
+        intArray = buildHeap(intArray);        
+        for (int i = e; i > 0; i--)
+        {
+            intArray = swap(intArray,0, i);
+            e--; 
+            maxheap(intArray, 0);
+        }
 
+        return c;
+    }
+
+    public int[] buildHeap(int[] intArray)
+    {
+        e = intArray.length-1;
+        for (int i = e/2; i >= 0; i--){
+            maxheap(intArray, i);        
+        }
+        return intArray;
+    }
+
+    public void maxheap(int[] intArray, int i)
+    { 
+        int left = 2*i ;
+        int right = 2*i + 1;
+        int max = i;
+        if (left <= e){
+            c++;
+            if( intArray[left] > intArray[i]){
+                max = left;
+            }
+        }
+        if (right <= e )    {   
+            c++;
+            if( intArray[right] > intArray[max]){
+                max = right;
+            }
+        }
+        if (max != i)
+        {
+            intArray = swap(intArray, i,max);
+            maxheap(intArray, max);
+        }
+    }    
+    //................Testing and Assisting Methods.............................//
     /**
      * method to swap a and b
      */
@@ -234,5 +291,24 @@ public class Sorter
             System.out.println(s.intArray[i]);
         }
         System.out.println("Changes/Comparisons: " + count);
+    }
+
+    public static void testHeap(int n){
+        Sorter s = new Sorter();
+        int count = s.heap(n);
+        for(int i = 0; i < s.intArray.length; i++){
+            System.out.println(s.intArray[i]);
+        }
+        System.out.println("Changes/Comparisons: " + count);
+    }
+
+    public static void testBuildHeap(){
+        //int[] a = {6,8,7,1,5,3,2,4};
+        Sorter s = new Sorter();
+        int[] a = s.createListRand(16);
+        s.buildHeap(a);
+        for(int i = 0; i < a.length; i++){
+            System.out.println(a[i]);
+        }
     }
 }
