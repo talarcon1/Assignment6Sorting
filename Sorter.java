@@ -31,23 +31,23 @@ public class Sorter
 
     public static void main(String args[]){
         Sorter s = new Sorter();
-        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
-        System.out.println("N       selection       insertion       Shell       Hibbard       Knuth       Gonnet       Sedgewick       heap       merge       quick");
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("N       selection       insertion       Shell       Hibbard       Knuth       Gonnet       Sedgewick       heap       merge       quick        NlogN");
         //int sorted = s.selection(1000);
 
-        System.out.println("1,000      " + s.selection(1000) + "         " + s.insertion(1000));
-        System.out.println("2,000      " + s.selection(2000) + "        " + s.insertion(2000));
-        System.out.println("3,000      " + s.selection(3000) + "        " + s.insertion(3000));
-        System.out.println("4,000      " + s.selection(4000) + "        " + s.insertion(4000));
-        System.out.println("5,000      " + s.selection(5000) + "       " + s.insertion(5000));
-        System.out.println("6,000      " + s.selection(6000) + "       " + s.insertion(6000));
-        System.out.println("7,000      " + s.selection(7000) + "       " + s.insertion(7000));
-        System.out.println("8,000      " + s.selection(8000) + "       " + s.insertion(8000));
-        System.out.println("9,000      " + s.selection(9000) + "       " + s.insertion(9000));
-        System.out.println("10,000     " + s.selection(10000) + "       " + s.insertion(10000));
-        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("1,000      " + s.selection(1000) + "         " + s.insertion(1000)  + "         " + s.shell(1000));
+        System.out.println("2,000      " + s.selection(2000) + "        " + s.insertion(2000)  + "         " + s.shell(2000));
+        System.out.println("3,000      " + s.selection(3000) + "        " + s.insertion(3000)  + "         " + s.shell(3000));
+        System.out.println("4,000      " + s.selection(4000) + "        " + s.insertion(4000)  + "         " + s.shell(4000));
+        System.out.println("5,000      " + s.selection(5000) + "       " + s.insertion(5000)  + "         " + s.shell(5000));
+        System.out.println("6,000      " + s.selection(6000) + "       " + s.insertion(6000)  + "         " + s.shell(6000));
+        System.out.println("7,000      " + s.selection(7000) + "       " + s.insertion(7000)  + "         " + s.shell(7000));
+        System.out.println("8,000      " + s.selection(8000) + "       " + s.insertion(8000)  + "         " + s.shell(8000));
+        System.out.println("9,000      " + s.selection(9000) + "       " + s.insertion(9000)  + "         " + s.shell(9000));
+        System.out.println("10,000     " + s.selection(10000) + "       " + s.insertion(10000)  + "         " + s.shell(10000));
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
 
-        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
 
     }
 
@@ -116,28 +116,12 @@ public class Sorter
         return count;
     }
 
-    //     public void shellBook( T [ ] a )
-    //     {
-    //         int j;
-    //         for( int gap = a.length / 2; gap > 0; gap /= 2 )
-    //         {
-    //             for( int i = gap; i < a.length; i++ )
-    //             {
-    //                 T tmp = a[ i ];
-    //                 for( j = i; j >= gap && tmp.compareTo( a[ j - gap ] ) < 0; j -= gap )
-    //                 {
-    //                     a[ j ] = a[ j - gap ];
-    //                 }
-    //                 a[ j ] = tmp;
-    //             }
-    //         }
-    //     }
     /**
      * working where count?
      */
-    public int shell( int n )
+    public int shellWorking( int n )
     {
-        intArray = createListOrd(n);
+        intArray = createListRand(n);
         int count = 0;
         int j;
         for( int gap = intArray.length / 2; gap > 0; gap /= 2 )
@@ -160,35 +144,154 @@ public class Sorter
         return count;
     }
 
-    public int shellOld(int n) {
-        int count = 0;
-        intArray = createListOrd(n);
-        int increment = intArray.length / 2;
-        while (increment >= 1) {
-            for (int i = increment; i < n; i++) {
-                int j = i;
-                int temp = intArray[i];
-                while (j >= increment && intArray[j - increment] > temp) {
-                    intArray[j] = intArray[j - increment];
-                    j = j - increment;
-                    count++;
-                }
-                intArray[j] = temp;                
-            }
+    /**
+     * shell method
+     * fix conditional while 
+     */
+    public int shell(int n){
+        //         int k = 1;
+        //         int j;
+        //         int temp;
+        //         int count= 0;
+        //         int[] a = createListRand(n);
+        //         int inc = (n-1)/2;         
+        //         while (inc >=1)
+        //         {
+        //             for (int i = inc; i<=a.length-1;i++)
+        //             {
+        //                 temp = a[i];
+        //                 j = i;
+        //                 count++;
+        //                 while ( j>=inc && a[j-inc]>temp)
+        //                 {
+        //                     a[j] = a[j-inc];
+        //                     j = j - inc;
+        //                     if(j!=i){
+        //                         count++;
+        //                     }
+        //                 }
+        //                 a[j]=temp;
+        //             }
+        //             k++; 
+        //             inc = (n-1)/(int)java.lang.Math.pow(2,k);// n / 2^k
+        //         }
+        //         return count;
 
-            if (increment == 2) {
-                increment = 1;
-            } else {
-                // increment *= (5.0 / 11);
-                increment *= .5;
+        int j, p, gap;
+        int tmp;
+        int count = 0;
+        int[] a = createListRand(n);
+        for (gap = (n-1)/2; gap > 0; gap = gap/2)
+            for ( p = gap; p < n ; p++)
+            {
+                tmp = a[p];
+                count++;
+                for (j = p; j >= gap && tmp < a[j- gap]; j = j - gap){
+                    if(j!=p){
+                        count++;
+                    }
+                    a[j] = a[j-gap];
+                }
+                a[j] = tmp;
             }
+        return count;
+    }
+
+    /**
+     * Shell Hibbard 
+     * Needs fix: go through loop fix while statement
+     */
+    public int shellHibbard(int n){        
+        //         int k = 0;
+        //         int j;
+        //         int temp;
+        //         int count= 0;
+        //         int[] a = createListRand(n);
+        //         int inc = (int)(java.lang.Math.pow(2,k))-(int)1; //2^k - 1
+        //         while (a[inc] <= a.length-1)
+        //         {
+        //             for (int i = inc; i<=a.length-1;i++)
+        //             {
+        //                 temp = a[i];
+        //                 j = i;
+        //                 count++;
+        //                 while ( j>=inc && a[j-inc]>temp)
+        //                 {
+        //                     a[j] = a[j-inc];
+        //                     j = j - inc;
+        //                     if(j!=i){
+        //                         count++;
+        //                     }
+        //                 }
+        //                 a[j]=temp;
+        //             }
+        //             k++; 
+        //             inc = (int)(java.lang.Math.pow(2,k))-(int)1;
+        //         }
+        //         return count;
+
+        int j, p, gap;
+        int tmp;
+        int count = 0;
+        int[] a = createListRand(n);
+        int k =0;
+        for (gap = 0; gap > 0; gap = (int)java.lang.Math.pow(2,k)-(int)1){
+            for ( p = gap; p < n ; p++)
+            {
+                tmp = a[p];
+                count++;
+                for (j = p; j >= gap && tmp < a[j- gap]; j = j - gap){
+                    if(j!=p){
+                        count++;
+                    }
+                    a[j] = a[j-gap];
+                }
+                a[j] = tmp;
+            }
+            k++;
+        }
+            
+        return count;
+    }
+
+    /**
+     * shell knuth
+     * Fix go through loop to fix while statement
+     */
+    public int shellKnuth(int n){        
+        int k = 0;
+        int j;
+        int temp;
+        int count= 0;
+        int[] a = createListRand(n);
+        int inc = (int)((java.lang.Math.pow(3,k))-(int)1)/2; // (3^k -1) / 2
+        while (inc <= a.length+1)
+        {
+            for (int i = inc; i<=a.length-1;i++)
+            {
+                temp = a[i];
+                j = i;
+                count++;
+                while ( j>=inc && a[j-inc]>temp)
+                {
+                    a[j] = a[j-inc];
+                    j = j - inc;
+                    if(j!=i){
+                        count++;
+                    }
+                }
+                a[j]=temp;
+            }
+            k++; 
+            inc = (int)((java.lang.Math.pow(3,k))-(int)1)/2;
         }
         return count;
     }
+
     private static int e;
     private static int c;
     /**
-     * heap sort
+     * heap sort ***Working but take away static variables
      * uses heapify method to create heap, maxheap to swap largest in heap
      * @param n = number of elements
      * @ret count = number of comparisons
@@ -296,6 +399,24 @@ public class Sorter
     public static void testHeap(int n){
         Sorter s = new Sorter();
         int count = s.heap(n);
+        for(int i = 0; i < s.intArray.length; i++){
+            System.out.println(s.intArray[i]);
+        }
+        System.out.println("Changes/Comparisons: " + count);
+    }
+
+    public static void testShellHibbard(int n){
+        Sorter s = new Sorter();
+        int count = s.shellHibbard(n);
+        for(int i = 0; i < s.intArray.length; i++){
+            System.out.println(s.intArray[i]);
+        }
+        System.out.println("Changes/Comparisons: " + count);
+    }
+
+    public static void testShellKnuth(int n){
+        Sorter s = new Sorter();
+        int count = s.shellKnuth(n);
         for(int i = 0; i < s.intArray.length; i++){
             System.out.println(s.intArray[i]);
         }
