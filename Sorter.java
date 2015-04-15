@@ -125,10 +125,30 @@ public class Sorter
     }
 
     /**
+     * shell new
+     */
+    public int shell(int n){
+        int[] a = createListRand(n);
+        int[] gaps = createGapsShell(n);
+        int count = 0;
+        int j = 0;
+        for(int index = gaps.length-1; index >= 0; index--){
+            int gap = gaps[index];
+            for(int i = 0; i+gap < n-1; i += gap){
+                count++;
+                if(a[i] > a[i+gaps[index]]){
+                    swap(a,i ,i+index);
+                }
+            }
+        }
+        return count;
+    }
+
+    /**
      * shell method
      * fix conditional while 
      */
-    public int shell(int n){
+    public int shellW(int n){
         //         int k = 1;
         //         int j;
         //         int temp;
@@ -177,11 +197,29 @@ public class Sorter
         return count;
     }
 
+    public int shellHibbard(int n){
+        int[] a = createListRand(n);
+        int[] gaps = createGapsHibbard(n);
+        int count = 0;
+        int j = 0;
+        for(int index = gaps.length-1; index >= 0; index--){
+            int gap = gaps[index];
+            for(int i = 0; i+gap <= n-1; i += gap){
+                count++;
+                if(a[i] > a[i+gap]){
+                    a = swap(a,a[i] ,a[i+gap]);
+                }
+            }
+        }
+        return count;       
+    }
+
     /**
+    /*   
      * Shell Hibbard 
      * Needs fix: go through loop fix while statement
      */
-    public int shellHibbard(int n){        
+    public int shellHibbardW(int n){        
         //         int k = 0;
         //         int j;
         //         int temp;
@@ -462,7 +500,7 @@ public class Sorter
         }
         return gaps;
     }
-    
+
     //.............................Test Sorts........................................\\
 
     public static void testSelection(int n){
