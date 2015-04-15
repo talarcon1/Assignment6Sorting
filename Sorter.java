@@ -1,4 +1,6 @@
 import java.util.Random;
+import java.util.Collections;
+import java.util.Arrays;
 /**
  * Evaluates different sorting algorithms
  * prints the evaluated sorting methods
@@ -91,28 +93,6 @@ public class Sorter
                 count++;
             }
         } 
-        return count;
-    }
-
-    public int shellMy( int n )
-    {
-        int count = 0;
-        intArray = createListRand(n);
-
-        for( int gap = intArray.length / 2; gap > 0; gap /= 2 )
-        {
-            for(int j = 0; j < gap; j++){
-                for( int i = j; i < intArray.length; i+= gap)
-                {
-                    if(i + gap <= n-1){
-                        count++;
-                        if(intArray[i] > intArray[i+gap] ){
-                            swap(intArray,i,i+gap);
-                        }
-                    }
-                }
-            }           
-        }
         return count;
     }
 
@@ -250,7 +230,41 @@ public class Sorter
             }
             k++;
         }
-            
+
+        return count;
+    }
+
+    /**
+     * shell Sedgewick
+     * Fix go through loop to fix while statement
+     */
+    public int shellSedgewick(int n){        
+        int k = 1;
+        int j;
+        int temp;
+        int count= 0;
+        int[] a = createListRand(n);
+        int inc = (int)((java.lang.Math.pow(4,k))+ (3*java.lang.Math.pow(2,k+1)+1)); // (3^k -1) / 2
+        while (inc <= a.length+1)
+        {
+            for (int i = inc; i<=a.length-1;i++)
+            {
+                temp = a[i];
+                j = i;
+                count++;
+                while ( j>=inc && a[j-inc]>temp)
+                {
+                    a[j] = a[j-inc];
+                    j = j - inc;
+                    if(j!=i){
+                        count++;
+                    }
+                }
+                a[j]=temp;
+            }
+            k++; 
+            inc = (int)((java.lang.Math.pow(3,k))-(int)1)/2;
+        }
         return count;
     }
 
@@ -343,6 +357,7 @@ public class Sorter
         }
     }    
     //................Testing and Assisting Methods.............................//
+
     /**
      * method to swap a and b
      */
@@ -369,6 +384,87 @@ public class Sorter
         return intArray;
     }
 
+    //.......................Create Gaps.................................\\
+
+    /**
+     * Method to create gap array for Shell
+     * n/2^k
+     */
+    public int[] createGapsShell(int n){
+        int count = 0;   
+        int i = n / 2;
+        while(i >= 1){
+            count++;
+            i /= 2;
+        }
+        int[] gaps = new int[count];
+        n /= 2;
+        for(int j = 0; j < count; j++){
+            gaps[j] = n;
+            n /= 2;
+        }
+        return gaps;
+    }
+
+    /**
+     * Method to create gap array for Hibbard
+     * //2^k - 1
+     */
+    public int[] createGapsHibbard(int n){
+        int count = 0;
+        int i = 1;
+        while(i <= n){
+            count++;
+            i = (int)(java.lang.Math.pow(2,count+1))-(int)1;            
+        }
+        int[] gaps = new int[count];
+        for(int j = 0; j < count; j++){
+            gaps[j] = (int)(java.lang.Math.pow(2,j+1))-1;
+        }
+        //Collections.reverse(Arrays.asList(gaps));
+        return gaps;
+    }
+
+    /**
+     * Method to create gap array for Knuth
+     * (3^k - 1) / 2
+     */
+    public int[] createGapsKnuth(int n){
+        int count = 0;
+        int i = 1;
+        while(i <= n){
+            count++;
+            i = (int)((java.lang.Math.pow(3,count+1))-(int)1)/2;            
+        }
+        int[] gaps = new int[count];
+        for(int j = 0; j < count; j++){
+            gaps[j] = (int)((java.lang.Math.pow(3,j+1))-(int)1)/2;
+        }
+        Collections.reverse(Arrays.asList(gaps));
+        return gaps;
+    }
+
+    /**
+     * Method to create gap array for Sedgewick
+     * 4^k + 3*2^(k-1) + 1
+     */
+    public int[] createGapsSedgewick(int n){
+        int count = 0;
+        int i = 1;
+        while(i <= n){
+            count++;
+            i = (int)((java.lang.Math.pow(4,count))+ (3*java.lang.Math.pow(2,count-1))+1);            
+        }
+        int[] gaps = new int[count];
+        gaps[0] = 1;
+        for(int j = 1; j < count; j++){
+            gaps[j] = (int)((java.lang.Math.pow(4,j))+ (3*java.lang.Math.pow(2,j-1)+1));
+        }
+        return gaps;
+    }
+    
+    //.............................Test Sorts........................................\\
+
     public static void testSelection(int n){
         Sorter s = new Sorter();
         int count = s.selection(n);
@@ -385,20 +481,20 @@ public class Sorter
             System.out.println(s.intArray[i]);
         }
         System.out.println("Changes/Comparisons: " + count);
-    }
+    }   
 
-    public static void testShell(int n){
+    public static void testHeap(int n){
         Sorter s = new Sorter();
-        int count = s.shell(n);
+        int count = s.heap(n);
         for(int i = 0; i < s.intArray.length; i++){
             System.out.println(s.intArray[i]);
         }
         System.out.println("Changes/Comparisons: " + count);
     }
 
-    public static void testHeap(int n){
+    public static void testShell(int n){
         Sorter s = new Sorter();
-        int count = s.heap(n);
+        int count = s.shell(n);
         for(int i = 0; i < s.intArray.length; i++){
             System.out.println(s.intArray[i]);
         }
@@ -423,11 +519,54 @@ public class Sorter
         System.out.println("Changes/Comparisons: " + count);
     }
 
+    public static void testShellSedgewick(int n){
+        Sorter s = new Sorter();
+        int count = s.shellSedgewick(n);
+        for(int i = 0; i < s.intArray.length; i++){
+            System.out.println(s.intArray[i]);
+        }
+        System.out.println("Changes/Comparisons: " + count);
+    }
+
     public static void testBuildHeap(){
         //int[] a = {6,8,7,1,5,3,2,4};
         Sorter s = new Sorter();
         int[] a = s.createListRand(16);
         s.buildHeap(a);
+        for(int i = 0; i < a.length; i++){
+            System.out.println(a[i]);
+        }
+    }
+
+    //.....................................TEST GAPS..................................\\
+
+    public static void testGapsShell(int n){
+        Sorter s = new Sorter();
+        int[] a = s.createGapsShell(n);
+        for(int i = 0; i < a.length; i++){
+            System.out.println(a[i]);
+        }
+    }
+
+    public static void testGapsHibbard(int n){
+        Sorter s = new Sorter();
+        int[] a = s.createGapsHibbard(n);
+        for(int i = 0; i < a.length; i++){
+            System.out.println(a[i]);
+        }
+    }
+
+    public static void testGapsKnuth(int n){
+        Sorter s = new Sorter();
+        int[] a = s.createGapsKnuth(n);
+        for(int i = 0; i < a.length; i++){
+            System.out.println(a[i]);
+        }
+    }
+
+    public static void testGapsSedgewick(int n){
+        Sorter s = new Sorter();
+        int[] a = s.createGapsSedgewick(n);
         for(int i = 0; i < a.length; i++){
             System.out.println(a[i]);
         }
