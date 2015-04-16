@@ -1,7 +1,7 @@
 #BlueJ package file
 objectbench.height=76
 objectbench.width=804
-package.editor.height=561
+package.editor.height=510
 package.editor.width=706
 package.editor.x=0
 package.editor.y=0
@@ -10,10 +10,10 @@ package.numTargets=1
 package.showExtends=true
 package.showUses=true
 project.charset=UTF-8
-target1.editor.height=699
-target1.editor.width=1296
-target1.editor.x=-8
-target1.editor.y=-8
+target1.editor.height=681
+target1.editor.width=1279
+target1.editor.x=1
+target1.editor.y=1
 target1.height=50
 target1.name=Sorter
 target1.naviview.expanded=true
