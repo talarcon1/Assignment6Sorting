@@ -30,7 +30,7 @@ public class Sorter
     {
         randomNum = new Random();
         int n1 = (int)(Math.log(1000) / Math.log(2) * 1000);
-        
+
     }
 
     public static void main(String args[]){
@@ -52,12 +52,8 @@ public class Sorter
         System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
 
         System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
-        
-        
 
     }
-    
-    
     /**
      * selection method
      * @ret returns number of comparisons
@@ -187,60 +183,60 @@ public class Sorter
     }
 
     /**
-     * Shell Hibbard 
+     * Shell Hibbard Sort working
      * Needs fix: go through loop fix while statement
      */
     public int shellHibbard(int n){        
-        //         int k = 0;
-        //         int j;
-        //         int temp;
-        //         int count= 0;
-        //         int[] a = createListRand(n);
-        //         int inc = (int)(java.lang.Math.pow(2,k))-(int)1; //2^k - 1
-        //         while (a[inc] <= a.length-1)
-        //         {
-        //             for (int i = inc; i<=a.length-1;i++)
-        //             {
-        //                 temp = a[i];
-        //                 j = i;
-        //                 count++;
-        //                 while ( j>=inc && a[j-inc]>temp)
-        //                 {
-        //                     a[j] = a[j-inc];
-        //                     j = j - inc;
-        //                     if(j!=i){
-        //                         count++;
-        //                     }
-        //                 }
-        //                 a[j]=temp;
-        //             }
-        //             k++; 
-        //             inc = (int)(java.lang.Math.pow(2,k))-(int)1;
-        //         }
-        //         return count;
-
-        int j, p, gap;
-        int tmp;
-        int count = 0;
+        int k = 1;
+        int j;
+        int temp;
+        int count= 0;
         int[] a = createListRand(n);
-        int k =0;
-        for (gap = 0; gap > 0; gap = (int)java.lang.Math.pow(2,k)-(int)1){
-            for ( p = gap; p < n ; p++)
+        int inc = (int)(java.lang.Math.pow(2,k))-(int)1; //2^k - 1
+        while (inc <= a.length-1)
+        {
+            for (int i = inc; i<=a.length-1;i++)
             {
-                tmp = a[p];
+                temp = a[i];
+                j = i;
                 count++;
-                for (j = p; j >= gap && tmp < a[j- gap]; j = j - gap){
-                    if(j!=p){
+                while ( j>=inc && a[j-inc]>temp)
+                {
+                    a[j] = a[j-inc];
+                    j = j - inc;
+                    if(j!=i){
                         count++;
                     }
-                    a[j] = a[j-gap];
                 }
-                a[j] = tmp;
+                a[j]=temp;
             }
-            k++;
+            k++; 
+            inc = (int)(java.lang.Math.pow(2,k))-(int)1;
         }
-
         return count;
+        // 
+        //         int j, p, gap;
+        //         int tmp;
+        //         int count = 0;
+        //         int[] a = createListRand(n);
+        //         int k =1;
+        //         for (gap = 0; gap > 0; gap = (int)java.lang.Math.pow(2,k)-(int)1){
+        //             for ( p = gap; p < n ; p++)
+        //             {
+        //                 tmp = a[p];
+        //                 count++;
+        //                 for (j = p; j >= gap && tmp < a[j- gap]; j = j - gap){
+        //                     if(j!=p){
+        //                         count++;
+        //                     }
+        //                     a[j] = a[j-gap];
+        //                 }
+        //                 a[j] = tmp;
+        //             }
+        //             k++;
+        //         }
+        // 
+        //         return count;
     }
 
     /**
@@ -277,7 +273,6 @@ public class Sorter
         return count;
     }
 
-    
     /**
      * shell Sedgewick not Gonnet
      * Used as placeholder
@@ -311,6 +306,7 @@ public class Sorter
         }
         return count;
     }
+
     /**
      * shell knuth Sort Working
      * Fix go through loop to fix while statement
@@ -400,8 +396,13 @@ public class Sorter
             maxheap(intArray, max);
         }
     }    
-    
+
     private static int z = 0;
+    /**
+     * Quick Sort Working
+     * Work around static variable
+     * Make a generic quick method
+     */
     public static int quick(int[] a, int p, int r)
     {
         if(p<r)
