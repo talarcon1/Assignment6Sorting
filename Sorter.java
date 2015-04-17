@@ -29,7 +29,6 @@ public class Sorter
     public Sorter()
     {
         randomNum = new Random();
-
     }
 
     public static void main(String args[]){
@@ -51,7 +50,7 @@ public class Sorter
         //         System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
         // 
         //         System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
-
+        //System.out.println((int)( Math.log(8) / Math.log(2) * 8));
         String leftAlignFormat = "| %-10d | %-10d | %-10d | %-10d | %-10d | %-10d | %-10d | %-10d | %-10d | %-10d | %-10d | %-10d | %n ";
         System.out.format(" +------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+%n");
         System.out.printf(" | N          |selection   |insertion   | Shell      | Hibbard    | Knuth      | Gonnet     | Sedgewick  | Heap       | Merge      | Quick      | NlogN%n");
@@ -63,13 +62,16 @@ public class Sorter
     }
 
     /**
-     * selection method
+     * selection method Working
+     * Count Good
      * @ret returns number of comparisons
      * @param amount of random entries
      */
     public int selection(int n){    
         intArray = createListRand(n);
         int minIndex;
+        int comparisons=0;
+        int[] data = createListRand(n);
         int count =0;
         for(int index = 0; index < intArray.length-1; index++){
             minIndex = index;
@@ -82,14 +84,15 @@ public class Sorter
             if (minIndex != index){
                 swap(intArray,index,minIndex);
                 minIndex = index;
-                count ++;
             }
         }
         return count;
+
     }
 
     /**
      * sort working
+     * Count good
      */
     public int insertion(int n){
         intArray = createListRand(n);
@@ -501,7 +504,7 @@ public class Sorter
             }
         }
     }
-    
+
     private static int y;
     public int mergeSort(int[] data, int first, int n){
         int n1;
@@ -509,15 +512,15 @@ public class Sorter
         if(n>1){
             n1 = n / 2;
             n2 = n - n1;
-            
+
             mergeSort(data,first,n1);
             mergeSort(data,first + n1, n2);
-            
+
             merge(data,first,n1,n2);
         }
         return y;
     }
-    
+
     public void merge(int[] data, int first, int n1, int n2){
         int[] temp = new int[n1+n2];
         int copied = 0;
@@ -532,12 +535,12 @@ public class Sorter
                 temp[copied++] = data[first + n1 + (copied2++)];
             }
         }
-        
+
         while(copied1 < n1){
             y ++;
             temp[copied++] = data[first + (copied1++)];
         }
-        
+
         for(i =0; i < copied; i++){
             y ++;
             data[first + i] = temp[i];
