@@ -29,36 +29,35 @@ public class Sorter
     public Sorter()
     {
         randomNum = new Random();
-        int n1 = (int)(Math.log(1000) / Math.log(2) * 1000);
 
     }
 
     public static void main(String args[]){
         Sorter s = new Sorter();
-        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
-        System.out.println("N       selection       insertion       Shell       Hibbard       Knuth       Gonnet       Sedgewick       heap       merge       quick        NlogN");
-        //int sorted = s.selection(1000);
-
-        System.out.println("1,000      " + s.selection(1000) + "         " + s.insertion(1000)  + "         " + s.shell(1000) + "         " + s.shellHibbard(1000) + "        "+ s.shellKnuth(1000) + "        "  + s.shellGonnet(1000) + "        " + s.shellSedgewick(1000) + "        " + s.heap(1000) + "        " + "        " + s.quick(s.createListRand(1000),0,999) + "        " + (int)(Math.log(1000) / Math.log(2) * 1000));
-        System.out.println("2,000      " + s.selection(2000) + "        " + s.insertion(2000)  + "         " + s.shell(2000)+ "         " + s.shellHibbard(2000) + "        " + s.shellKnuth(2000) + "        "  + s.shellGonnet(2000) + "        " + s.shellSedgewick(2000) + "        " + s.heap(2000) + "        " +  "        " +s.quick(s.createListRand(2000),0,1999) + "        " + (int)(Math.log(2000) / Math.log(2) * 2000));
-        System.out.println("3,000      " + s.selection(3000) + "        " + s.insertion(3000)  + "         " + s.shell(3000)+ "         " + s.shellHibbard(3000) + "        " + s.shellKnuth(3000) + "        "  + s.shellGonnet(3000) + "        " + s.shellSedgewick(3000) + "        " + s.heap(3000) + "        " +  "        " +s.quick(s.createListRand(3000),0,2999) + "        " + (int)(Math.log(3000) / Math.log(2) * 3000));
-        System.out.println("4,000      " + s.selection(4000) + "        " + s.insertion(4000)  + "         " + s.shell(4000)+ "         " + s.shellHibbard(4000) + "        " + s.shellKnuth(4000) + "        "  + s.shellGonnet(4000) + "        " + s.shellSedgewick(4000) + "        " + s.heap(4000) + "        " +  "        " +s.quick(s.createListRand(4000),0,3999) + "        " + (int)(Math.log(4000) / Math.log(2) * 4000));
-        System.out.println("5,000      " + s.selection(5000) + "       " + s.insertion(5000)  + "         " + s.shell(5000)+ "         " + s.shellHibbard(5000) + "        " + s.shellKnuth(5000) + "        "  + s.shellGonnet(5000) + "        " + s.shellSedgewick(5000) + "        " + s.heap(5000) + "        " +  "        " +s.quick(s.createListRand(5000),0,4999) + "        " + (int)(Math.log(5000) / Math.log(2) * 5000));
-        System.out.println("6,000      " + s.selection(6000) + "       " + s.insertion(6000)  + "         " + s.shell(6000)+ "         " + s.shellHibbard(6000) + "        " + s.shellKnuth(6000) + "        "  + s.shellGonnet(6000) + "        " +s.shellSedgewick(6000) + "        " + s.heap(6000) + "        " + "        " + s.quick(s.createListRand(6000),0,5999) + "        " + (int)(Math.log(6000) / Math.log(2) * 6000));
-        System.out.println("7,000      " + s.selection(7000) + "       " + s.insertion(7000)  + "         " + s.shell(7000)+ "         " + s.shellHibbard(7000) + "        " + s.shellKnuth(7000) + "        " + s.shellGonnet(7000) + "        "  +s.shellSedgewick(7000) + "        " + s.heap(7000) + "        " +  "        " +s.quick(s.createListRand(7000),0,6999) + "        " + (int)(Math.log(7000) / Math.log(2) * 7000));
-        System.out.println("8,000      " + s.selection(8000) + "       " + s.insertion(8000)  + "         " + s.shell(8000)+ "         " + s.shellHibbard(8000) + "        " + s.shellKnuth(8000) + "        " + s.shellGonnet(8000) + "        "  +s.shellSedgewick(8000) + "        " + s.heap(8000) + "        " + "        " + s.quick(s.createListRand(8000),0,7999) + "        " + (int)(Math.log(8000) / Math.log(2) * 8000));
-        System.out.println("9,000      " + s.selection(9000) + "       " + s.insertion(9000)  + "         " + s.shell(9000)+ "         " + s.shellHibbard(9000) + "        " + s.shellKnuth(9000) + "        " + s.shellGonnet(9000) + "        "  +s.shellSedgewick(9000) + "        " + s.heap(9000) + "        " +  "        " +s.quick(s.createListRand(9000),0,8999) + "        " + (int)(Math.log(9000) / Math.log(2) * 9000));
-        System.out.println("10,000     " + s.selection(10000) + "       " + s.insertion(10000)  + "         " + s.shell(10000)+ "         " + s.shellHibbard(10000) + "        " + s.shellKnuth(10000) + "        " + s.shellGonnet(10000) + "        "  +s.shellSedgewick(10000) + "        " + s.heap(10000) + "        " +  "        " +s.quick(s.createListRand(10000),0,9999) + "        " + (int)(Math.log(10000) / Math.log(2) * 10000));
-        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
-
-        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
+        //         System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
+        //         System.out.println("N       selection       insertion       Shell       Hibbard       Knuth       Gonnet       Sedgewick       heap       merge       quick        NlogN");
+        //         //int sorted = s.selection(1000);
+        // 
+        //         System.out.println("1,000      " + s.selection(1000) + "         " + s.insertion(1000)  + "         " + s.shell(1000) + "         " + s.shellHibbard(1000) + "        "+ s.shellKnuth(1000) + "        "  + s.shellGonnet(1000) + "        " + s.shellSedgewick(1000) + "        " + s.heap(1000) + "        " + "        " + s.quick(s.createListRand(1000),0,999) + "        " + (int)(Math.log(1000) / Math.log(2) * 1000));
+        //         System.out.println("2,000      " + s.selection(2000) + "        " + s.insertion(2000)  + "         " + s.shell(2000)+ "         " + s.shellHibbard(2000) + "        " + s.shellKnuth(2000) + "        "  + s.shellGonnet(2000) + "        " + s.shellSedgewick(2000) + "        " + s.heap(2000) + "        " +  "        " +s.quick(s.createListRand(2000),0,1999) + "        " + (int)(Math.log(2000) / Math.log(2) * 2000));
+        //         System.out.println("3,000      " + s.selection(3000) + "        " + s.insertion(3000)  + "         " + s.shell(3000)+ "         " + s.shellHibbard(3000) + "        " + s.shellKnuth(3000) + "        "  + s.shellGonnet(3000) + "        " + s.shellSedgewick(3000) + "        " + s.heap(3000) + "        " +  "        " +s.quick(s.createListRand(3000),0,2999) + "        " + (int)(Math.log(3000) / Math.log(2) * 3000));
+        //         System.out.println("4,000      " + s.selection(4000) + "        " + s.insertion(4000)  + "         " + s.shell(4000)+ "         " + s.shellHibbard(4000) + "        " + s.shellKnuth(4000) + "        "  + s.shellGonnet(4000) + "        " + s.shellSedgewick(4000) + "        " + s.heap(4000) + "        " +  "        " +s.quick(s.createListRand(4000),0,3999) + "        " + (int)(Math.log(4000) / Math.log(2) * 4000));
+        //         System.out.println("5,000      " + s.selection(5000) + "       " + s.insertion(5000)  + "         " + s.shell(5000)+ "         " + s.shellHibbard(5000) + "        " + s.shellKnuth(5000) + "        "  + s.shellGonnet(5000) + "        " + s.shellSedgewick(5000) + "        " + s.heap(5000) + "        " +  "        " +s.quick(s.createListRand(5000),0,4999) + "        " + (int)(Math.log(5000) / Math.log(2) * 5000));
+        //         System.out.println("6,000      " + s.selection(6000) + "       " + s.insertion(6000)  + "         " + s.shell(6000)+ "         " + s.shellHibbard(6000) + "        " + s.shellKnuth(6000) + "        "  + s.shellGonnet(6000) + "        " +s.shellSedgewick(6000) + "        " + s.heap(6000) + "        " + "        " + s.quick(s.createListRand(6000),0,5999) + "        " + (int)(Math.log(6000) / Math.log(2) * 6000));
+        //         System.out.println("7,000      " + s.selection(7000) + "       " + s.insertion(7000)  + "         " + s.shell(7000)+ "         " + s.shellHibbard(7000) + "        " + s.shellKnuth(7000) + "        " + s.shellGonnet(7000) + "        "  +s.shellSedgewick(7000) + "        " + s.heap(7000) + "        " +  "        " +s.quick(s.createListRand(7000),0,6999) + "        " + (int)(Math.log(7000) / Math.log(2) * 7000));
+        //         System.out.println("8,000      " + s.selection(8000) + "       " + s.insertion(8000)  + "         " + s.shell(8000)+ "         " + s.shellHibbard(8000) + "        " + s.shellKnuth(8000) + "        " + s.shellGonnet(8000) + "        "  +s.shellSedgewick(8000) + "        " + s.heap(8000) + "        " + "        " + s.quick(s.createListRand(8000),0,7999) + "        " + (int)(Math.log(8000) / Math.log(2) * 8000));
+        //         System.out.println("9,000      " + s.selection(9000) + "       " + s.insertion(9000)  + "         " + s.shell(9000)+ "         " + s.shellHibbard(9000) + "        " + s.shellKnuth(9000) + "        " + s.shellGonnet(9000) + "        "  +s.shellSedgewick(9000) + "        " + s.heap(9000) + "        " +  "        " +s.quick(s.createListRand(9000),0,8999) + "        " + (int)(Math.log(9000) / Math.log(2) * 9000));
+        //         System.out.println("10,000     " + s.selection(10000) + "       " + s.insertion(10000)  + "         " + s.shell(10000)+ "         " + s.shellHibbard(10000) + "        " + s.shellKnuth(10000) + "        " + s.shellGonnet(10000) + "        "  +s.shellSedgewick(10000) + "        " + s.heap(10000) + "        " +  "        " +s.quick(s.createListRand(10000),0,9999) + "        " + (int)(Math.log(10000) / Math.log(2) * 10000));
+        //         System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
+        // 
+        //         System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
 
         String leftAlignFormat = "| %-10d | %-10d | %-10d | %-10d | %-10d | %-10d | %-10d | %-10d | %-10d | %-10d | %-10d | %-10d | %n ";
         System.out.format(" +------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+%n");
         System.out.printf(" | N          |selection   |insertion   | Shell      | Hibbard    | Knuth      | Gonnet     | Sedgewick  | Heap       | Merge      | Quick      | NlogN%n");
         System.out.format(" +------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+%n");
         for(int i = 1000; i < 10001; i+=1000){
-            System.out.format(leftAlignFormat, i,s.selection(i),s.insertion(i),s.shell(i),s.shellHibbard(i),s.shellKnuth(i),s.shellGonnet(i),s.shellSedgewick(i),s.heap(1000),s.merge(i),s.quick(s.createListRand(i),0,i-1),(int)(Math.log(i) / Math.log(2) * i));
+            System.out.format(leftAlignFormat, i,s.selection(i),s.insertion(i),s.shell(i),s.shellHibbard(i),s.shellKnuth(i),s.shellGonnet(i),s.shellSedgewick(i),s.heap(1000),s.mergeSort(s.createListRand(i),0,i),s.quick(s.createListRand(i),0,i-1),(int)(Math.log(i) / Math.log(2) * i));
         }
         System.out.format("+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+%n");
     }
@@ -69,32 +68,6 @@ public class Sorter
      * @param amount of random entries
      */
     public int selection(int n){    
-        intArray = createListRand(n);
-        int minIndex;
-        int count =0;
-        for(int index = 0; index < intArray.length-1; index++){
-            minIndex = index;
-            for(int i = index + 1; i < intArray.length-1; i++){
-                count++;
-                if(intArray[i] < intArray[minIndex]){
-                    minIndex = i;                   
-                }
-            }
-            if (minIndex != index){
-                swap(intArray,index,minIndex);
-                minIndex = index;
-                count ++;
-            }
-        }
-        return count;
-    }
-
-    /**
-     * merge placeholder 
-     * @ret returns number of comparisons
-     * @param amount of random entries
-     */
-    public int merge(int n){    
         intArray = createListRand(n);
         int minIndex;
         int count =0;
@@ -189,7 +162,6 @@ public class Sorter
     /**
      * shell method
      * fix conditional while 
-    >>>>>>> origin/master
      */
     public int shell(int n){
         //         int k = 1;
@@ -529,7 +501,48 @@ public class Sorter
             }
         }
     }
-
+    
+    private static int y;
+    public int mergeSort(int[] data, int first, int n){
+        int n1;
+        int n2;
+        if(n>1){
+            n1 = n / 2;
+            n2 = n - n1;
+            
+            mergeSort(data,first,n1);
+            mergeSort(data,first + n1, n2);
+            
+            merge(data,first,n1,n2);
+        }
+        return y;
+    }
+    
+    public void merge(int[] data, int first, int n1, int n2){
+        int[] temp = new int[n1+n2];
+        int copied = 0;
+        int copied1 =0;
+        int copied2 = 0;
+        int i;
+        while((copied1 < n1) && (copied2 < n2)){
+            y++;
+            if (data[first + copied ] < data[first + n1 + copied2]){
+                temp[copied++] = data[first + copied1++];
+            }else{
+                temp[copied++] = data[first + n1 + (copied2++)];
+            }
+        }
+        
+        while(copied1 < n1){
+            y ++;
+            temp[copied++] = data[first + (copied1++)];
+        }
+        
+        for(i =0; i < copied; i++){
+            y ++;
+            data[first + i] = temp[i];
+        }
+    }
     //................Testing and Assisting Methods.............................//
     /**
      * method to swap a and b
