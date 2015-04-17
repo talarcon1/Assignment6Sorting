@@ -53,7 +53,16 @@ public class Sorter
 
         System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
 
+        String leftAlignFormat = "| %-10d | %-10d | %-10d | %-10d | %-10d | %-10d | %-10d | %-10d | %-10d | %-10d | %-10d | %-10d | %n ";
+        System.out.format(" +------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+%n");
+        System.out.printf(" | N          |selection   |insertion   | Shell      | Hibbard    | Knuth      | Gonnet     | Sedgewick  | Heap       | Merge      | Quick      | NlogN%n");
+        System.out.format(" +------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+%n");
+        for(int i = 1000; i < 10001; i+=1000){
+            System.out.format(leftAlignFormat, i,s.selection(i),s.insertion(i),s.shell(i),s.shellHibbard(i),s.shellKnuth(i),s.shellGonnet(i),s.shellSedgewick(i),s.heap(1000),s.merge(i),s.quick(s.createListRand(i),0,i-1),(int)(Math.log(i) / Math.log(2) * i));
+        }
+        System.out.format("+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+%n");
     }
+
     /**
      * selection method
      * @ret returns number of comparisons
@@ -63,9 +72,35 @@ public class Sorter
         intArray = createListRand(n);
         int minIndex;
         int count =0;
-        for(int index = 0; index < intArray.length; index++){
+        for(int index = 0; index < intArray.length-1; index++){
             minIndex = index;
-            for(int i = index + 1; i < intArray.length; i++){
+            for(int i = index + 1; i < intArray.length-1; i++){
+                count++;
+                if(intArray[i] < intArray[minIndex]){
+                    minIndex = i;                   
+                }
+            }
+            if (minIndex != index){
+                swap(intArray,index,minIndex);
+                minIndex = index;
+                count ++;
+            }
+        }
+        return count;
+    }
+
+    /**
+     * merge placeholder 
+     * @ret returns number of comparisons
+     * @param amount of random entries
+     */
+    public int merge(int n){    
+        intArray = createListRand(n);
+        int minIndex;
+        int count =0;
+        for(int index = 0; index < intArray.length-1; index++){
+            minIndex = index;
+            for(int i = index + 1; i < intArray.length-1; i++){
                 count++;
                 if(intArray[i] < intArray[minIndex]){
                     minIndex = i;                   
@@ -129,14 +164,12 @@ public class Sorter
     }
 
     /**
-<<<<<<< HEAD
      * shell method Working
      * fix conditional while
      * ~92 comparisons
-=======
      * shell new
      */
-    public int shell(int n){
+    public int shellMy(int n){
         int[] a = createListRand(n);
         int[] gaps = createGapsShell(n);
         int count = 0;
@@ -156,9 +189,9 @@ public class Sorter
     /**
      * shell method
      * fix conditional while 
->>>>>>> origin/master
+    >>>>>>> origin/master
      */
-    public int shellW(int n){
+    public int shell(int n){
         //         int k = 1;
         //         int j;
         //         int temp;
@@ -207,7 +240,7 @@ public class Sorter
         return count;
     }
 
-    public int shellHibbard(int n){
+    public int shellHibbardMy(int n){
         int[] a = createListRand(n);
         int[] gaps = createGapsHibbard(n);
         int count = 0;
@@ -225,7 +258,6 @@ public class Sorter
     }
 
     /**
-<<<<<<< HEAD
      * Shell Hibbard Sort working
      * Needs fix: go through loop fix while statement
      */
@@ -257,41 +289,42 @@ public class Sorter
             inc = (int)(java.lang.Math.pow(2,k))-(int)1;
         }
         return count;
-        // 
-        //         int j, p, gap;
-        //         int tmp;
-        //         int count = 0;
-=======
+    }
+    // 
+    //         int j, p, gap;
+    //         int tmp;
+    //         int count = 0;
+
     /*   
      * Shell Hibbard 
      * Needs fix: go through loop fix while statement
      */
-    public int shellHibbardW(int n){        
-        //         int k = 0;
-        //         int j;
-        //         int temp;
-        //         int count= 0;
->>>>>>> origin/master
-        //         int[] a = createListRand(n);
-        //         int k =1;
-        //         for (gap = 0; gap > 0; gap = (int)java.lang.Math.pow(2,k)-(int)1){
-        //             for ( p = gap; p < n ; p++)
-        //             {
-        //                 tmp = a[p];
-        //                 count++;
-        //                 for (j = p; j >= gap && tmp < a[j- gap]; j = j - gap){
-        //                     if(j!=p){
-        //                         count++;
-        //                     }
-        //                     a[j] = a[j-gap];
-        //                 }
-        //                 a[j] = tmp;
-        //             }
-        //             k++;
-        //         }
-        // 
-        //         return count;
-    }
+    // public int shellHibbardW(int n){        
+    //         int k = 0;
+    //         int j;
+    //         int temp;
+    //         int count= 0;
+
+    //         int[] a = createListRand(n);
+    //         int k =1;
+    //         for (gap = 0; gap > 0; gap = (int)java.lang.Math.pow(2,k)-(int)1){
+    //             for ( p = gap; p < n ; p++)
+    //             {
+    //                 tmp = a[p];
+    //                 count++;
+    //                 for (j = p; j >= gap && tmp < a[j- gap]; j = j - gap){
+    //                     if(j!=p){
+    //                         count++;
+    //                     }
+    //                     a[j] = a[j-gap];
+    //                 }
+    //                 a[j] = tmp;
+    //             }
+    //             k++;
+    //         }
+    // 
+    //         return count;
+    // }
 
     /**
      * shell Sedgewick Sort not working
