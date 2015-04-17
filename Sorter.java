@@ -129,11 +129,36 @@ public class Sorter
     }
 
     /**
+<<<<<<< HEAD
      * shell method Working
      * fix conditional while
      * ~92 comparisons
+=======
+     * shell new
      */
     public int shell(int n){
+        int[] a = createListRand(n);
+        int[] gaps = createGapsShell(n);
+        int count = 0;
+        int j = 0;
+        for(int index = gaps.length-1; index >= 0; index--){
+            int gap = gaps[index];
+            for(int i = 0; i+gap < n-1; i += gap){
+                count++;
+                if(a[i] > a[i+gaps[index]]){
+                    swap(a,i ,i+index);
+                }
+            }
+        }
+        return count;
+    }
+
+    /**
+     * shell method
+     * fix conditional while 
+>>>>>>> origin/master
+     */
+    public int shellW(int n){
         //         int k = 1;
         //         int j;
         //         int temp;
@@ -182,7 +207,25 @@ public class Sorter
         return count;
     }
 
+    public int shellHibbard(int n){
+        int[] a = createListRand(n);
+        int[] gaps = createGapsHibbard(n);
+        int count = 0;
+        int j = 0;
+        for(int index = gaps.length-1; index >= 0; index--){
+            int gap = gaps[index];
+            for(int i = 0; i+gap <= n-1; i += gap){
+                count++;
+                if(a[i] > a[i+gap]){
+                    a = swap(a,a[i] ,a[i+gap]);
+                }
+            }
+        }
+        return count;       
+    }
+
     /**
+<<<<<<< HEAD
      * Shell Hibbard Sort working
      * Needs fix: go through loop fix while statement
      */
@@ -218,6 +261,17 @@ public class Sorter
         //         int j, p, gap;
         //         int tmp;
         //         int count = 0;
+=======
+    /*   
+     * Shell Hibbard 
+     * Needs fix: go through loop fix while statement
+     */
+    public int shellHibbardW(int n){        
+        //         int k = 0;
+        //         int j;
+        //         int temp;
+        //         int count= 0;
+>>>>>>> origin/master
         //         int[] a = createListRand(n);
         //         int k =1;
         //         for (gap = 0; gap > 0; gap = (int)java.lang.Math.pow(2,k)-(int)1){

@@ -5,6 +5,7 @@ comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ SortingAlgorithm\r\n
 comment1.params=args
 comment1.target=void\ main(java.lang.String[])
 comment10.params=n
+<<<<<<< HEAD
 comment10.target=int\ heap(int)
 comment10.text=\r\n\ heap\ sort\ ***Working\ but\ take\ away\ static\ variables\r\n\ uses\ heapify\ method\ to\ create\ heap,\ maxheap\ to\ swap\ largest\ in\ heap\r\n\ @param\ n\ \=\ number\ of\ elements\r\n\ @ret\ count\ \=\ number\ of\ comparisons\r\n
 comment11.params=intArray
@@ -29,10 +30,38 @@ comment18.text=\r\n\ Method\ to\ create\ gap\ array\ for\ Shell\r\n\ n/2^k\r\n
 comment19.params=n
 comment19.target=int[]\ createGapsHibbard(int)
 comment19.text=\r\n\ Method\ to\ create\ gap\ array\ for\ Hibbard\r\n\ //2^k\ -\ 1\r\n
+=======
+comment10.target=int\ shellKnuth(int)
+comment10.text=\r\n\ shell\ knuth\r\n\ Fix\ go\ through\ loop\ to\ fix\ while\ statement\r\n
+comment11.params=n
+comment11.target=int\ heap(int)
+comment11.text=\r\n\ heap\ sort\ ***Working\ but\ take\ away\ static\ variables\r\n\ uses\ heapify\ method\ to\ create\ heap,\ maxheap\ to\ swap\ largest\ in\ heap\r\n\ @param\ n\ \=\ number\ of\ elements\r\n\ @ret\ count\ \=\ number\ of\ comparisons\r\n
+comment12.params=intArray
+comment12.target=int[]\ buildHeap(int[])
+comment13.params=intArray\ i
+comment13.target=void\ maxheap(int[],\ int)
+comment14.params=intArray\ indexA\ indexB
+comment14.target=int[]\ swap(int[],\ int,\ int)
+comment14.text=\r\n\ method\ to\ swap\ a\ and\ b\r\n
+comment15.params=n
+comment15.target=int[]\ createListRand(int)
+comment16.params=n
+comment16.target=int[]\ createListOrd(int)
+comment17.params=n
+comment17.target=int[]\ createGapsShell(int)
+comment17.text=\r\n\ Method\ to\ create\ gap\ array\ for\ Shell\r\n\ n/2^k\r\n
+comment18.params=n
+comment18.target=int[]\ createGapsHibbard(int)
+comment18.text=\r\n\ Method\ to\ create\ gap\ array\ for\ Hibbard\r\n\ //2^k\ -\ 1\r\n
+comment19.params=n
+comment19.target=int[]\ createGapsKnuth(int)
+comment19.text=\r\n\ Method\ to\ create\ gap\ array\ for\ Knuth\r\n\ (3^k\ -\ 1)\ /\ 2\r\n
+>>>>>>> origin/master
 comment2.params=n
 comment2.target=int\ selection(int)
 comment2.text=\r\n\ selection\ method\r\n\ @ret\ returns\ number\ of\ comparisons\r\n\ @param\ amount\ of\ random\ entries\r\n
 comment20.params=n
+<<<<<<< HEAD
 comment20.target=int[]\ createGapsKnuth(int)
 comment20.text=\r\n\ Method\ to\ create\ gap\ array\ for\ Knuth\r\n\ (3^k\ -\ 1)\ /\ 2\r\n
 comment21.params=n
@@ -54,10 +83,33 @@ comment28.params=n
 comment28.target=void\ testShellSedgewick(int)
 comment29.params=
 comment29.target=void\ testBuildHeap()
+=======
+comment20.target=int[]\ createGapsSedgewick(int)
+comment20.text=\r\n\ Method\ to\ create\ gap\ array\ for\ Sedgewick\r\n\ 4^k\ +\ 3*2^(k-1)\ +\ 1\r\n
+comment21.params=n
+comment21.target=void\ testSelection(int)
+comment22.params=n
+comment22.target=void\ testInsertion(int)
+comment23.params=n
+comment23.target=void\ testHeap(int)
+comment24.params=n
+comment24.target=void\ testShell(int)
+comment25.params=n
+comment25.target=void\ testShellHibbard(int)
+comment26.params=n
+comment26.target=void\ testShellKnuth(int)
+comment27.params=n
+comment27.target=void\ testShellSedgewick(int)
+comment28.params=
+comment28.target=void\ testBuildHeap()
+comment29.params=n
+comment29.target=void\ testGapsShell(int)
+>>>>>>> origin/master
 comment3.params=n
 comment3.target=int\ insertion(int)
 comment3.text=\r\n\ sort\ working\r\n
 comment30.params=n
+<<<<<<< HEAD
 comment30.target=void\ testGapsShell(int)
 comment31.params=n
 comment31.target=void\ testGapsHibbard(int)
@@ -67,11 +119,19 @@ comment33.params=n
 comment33.target=void\ testGapsSedgewick(int)
 comment34.params=n
 comment34.target=void\ testQuick(int)
+=======
+comment30.target=void\ testGapsHibbard(int)
+comment31.params=n
+comment31.target=void\ testGapsKnuth(int)
+comment32.params=n
+comment32.target=void\ testGapsSedgewick(int)
+>>>>>>> origin/master
 comment4.params=n
 comment4.target=int\ shellWorking(int)
 comment4.text=\r\n\ working\ where\ count?\r\n
 comment5.params=n
 comment5.target=int\ shell(int)
+<<<<<<< HEAD
 comment5.text=\r\n\ shell\ method\ Working\r\n\ fix\ conditional\ while\r\n\ ~92\ comparisons\r\n
 comment6.params=n
 comment6.target=int\ shellHibbard(int)
@@ -86,3 +146,18 @@ comment9.params=n
 comment9.target=int\ shellKnuth(int)
 comment9.text=\r\n\ shell\ knuth\ Sort\ Working\r\n\ Fix\ go\ through\ loop\ to\ fix\ while\ statement\r\n\ Too\ many\ Comparisons\r\n
 numComments=35
+=======
+comment5.text=\r\n\ shell\ new\r\n
+comment6.params=n
+comment6.target=int\ shellW(int)
+comment6.text=\r\n\ shell\ method\r\n\ fix\ conditional\ while\ \r\n
+comment7.params=n
+comment7.target=int\ shellHibbard(int)
+comment8.params=n
+comment8.target=int\ shellHibbardW(int)
+comment8.text=\r\n\ \ \ \ /*\ \ \ \r\n\ Shell\ Hibbard\ \r\n\ Needs\ fix\:\ go\ through\ loop\ fix\ while\ statement\r\n
+comment9.params=n
+comment9.target=int\ shellSedgewick(int)
+comment9.text=\r\n\ shell\ Sedgewick\r\n\ Fix\ go\ through\ loop\ to\ fix\ while\ statement\r\n
+numComments=33
+>>>>>>> origin/master
