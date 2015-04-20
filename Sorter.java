@@ -6,22 +6,12 @@ import java.lang.Math;
  * Evaluates different sorting algorithms
  * prints the evaluated sorting methods
  * creates a new random list in each method
- * method parameter: int n elements
  */
 public class Sorter
 {
-    //     private int[] a1000; Adding to git
-    //     private int[] a2000; anopther add to git
-    //     private int[] a3000;
-    //     private int[] a4000;
-    //     private int[] a5000;
-    //     private int[] a6000;
-    //     private int[] a7000;
-    //     private int[] a8000;
-    //     private int[] a9000;
-    //     private int[] a10000;
     private int[] intArray;
     private Random randomNum;
+    private static int count;
 
     /**
      * Constructor for objects of class SortingAlgorithm
@@ -50,13 +40,12 @@ public class Sorter
         //         System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
         // 
         //         System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
-        //System.out.println((int)( Math.log(8) / Math.log(2) * 8));
         String leftAlignFormat = "| %-10d | %-10d | %-10d | %-10d | %-10d | %-10d | %-10d | %-10d | %-10d | %-10d | %-10d | %-10d | %n ";
         System.out.format(" +------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+%n");
         System.out.printf(" | N          |selection   |insertion   | Shell      | Hibbard    | Knuth      | Gonnet     | Sedgewick  | Heap       | Merge      | Quick      | NlogN%n");
         System.out.format(" +------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+%n");
         for(int i = 1000; i < 10001; i+=1000){
-            System.out.format(leftAlignFormat, i,s.selection(i),s.insertion(i),s.shell(i),s.shellHibbard(i),s.shellKnuth(i),s.shellGonnet(i),s.shellSedgewick(i),s.heap(1000),s.mergeSort(s.createListRand(i),0,i),s.quick(s.createListRand(i),0,i-1),(int)(Math.log(i) / Math.log(2) * i));
+            System.out.format(leftAlignFormat, i,s.selection(i),s.insertion(i),s.shell(i),s.shellHibbard(i),s.shellKnuth(i),s.shellGonnet(i),s.shellSedgewick(i),s.heap(1000), s.mergeSort1(s.createListRand(i),0,i),s.quick1(s.createListRand(i),0,i-1),(int)(Math.log(i) / Math.log(2) * i));
         }
         System.out.format("+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+------------+%n");
     }
@@ -72,7 +61,7 @@ public class Sorter
         int minIndex;
         int comparisons=0;
         int[] data = createListRand(n);
-        int count =0;
+        count =0;
         for(int index = 0; index < intArray.length-1; index++){
             minIndex = index;
             for(int i = index + 1; i < intArray.length-1; i++){
@@ -96,7 +85,7 @@ public class Sorter
      */
     public int insertion(int n){
         intArray = createListRand(n);
-        int count = 0;
+        count = 0;
         for (int i = 1; i < n; i++) {             
             int j = i; 
             while (j > 0 && intArray[j] < intArray[j-1])  {
@@ -117,7 +106,7 @@ public class Sorter
     public int shellWorking( int n )
     {
         intArray = createListRand(n);
-        int count = 0;
+        count = 0;
         int j;
         for( int gap = intArray.length / 2; gap > 0; gap /= 2 )
         {
@@ -148,7 +137,7 @@ public class Sorter
     public int shellMy(int n){
         int[] a = createListRand(n);
         int[] gaps = createGapsShell(n);
-        int count = 0;
+        count = 0;
         int j = 0;
         for(int index = gaps.length-1; index >= 0; index--){
             int gap = gaps[index];
@@ -197,9 +186,9 @@ public class Sorter
 
         int j, p, gap;
         int tmp;
-        int count = 0;
+        count = 0;
         int[] a = createListRand(n);
-        for (gap = (n-1)/2; gap > 0; gap = gap/2)
+        for (gap = (int)(n-1)/2; gap > 0; gap = (int)gap/2)
             for ( p = gap; p < n ; p++)
             {
                 tmp = a[p];
@@ -215,34 +204,50 @@ public class Sorter
         return count;
     }
 
-    public int shellHibbardMy(int n){
+    /**
+     * My Shell Hibbard
+     * Working, with accurate count!
+     */
+    public int shellHibbard(int n){
+        int j, temp, inc;
+        count = 0;
         int[] a = createListRand(n);
         int[] gaps = createGapsHibbard(n);
-        int count = 0;
-        int j = 0;
-        for(int index = gaps.length-1; index >= 0; index--){
-            int gap = gaps[index];
-            for(int i = 0; i+gap <= n-1; i += gap){
+        int k = gaps.length - 1;
+        while (k >= 0)
+        {
+            inc = gaps[k];
+            for (int i = inc; i<=a.length-1;i++)
+            {
+                temp = a[i];
+                j = i;
                 count++;
-                if(a[i] > a[i+gap]){
-                    a = swap(a,a[i] ,a[i+gap]);
+                while ( j>=inc && a[j-inc]>temp)
+                {
+                    if(j!=i){
+                        count++;
+                    }
+                    a[j] = a[j-inc];
+                    j = j - inc;
                 }
+                a[j]=temp;
             }
+            k--; 
         }
-        return count;       
+        return count;    
     }
 
     /**
      * Shell Hibbard Sort working
      * Needs fix: go through loop fix while statement
      */
-    public int shellHibbard(int n){        
+    public int shellHibbardY(int n){        
         int k = 1;
         int j;
         int temp;
-        int count= 0;
+        count= 0;
         int[] a = createListRand(n);
-        int inc = (int)(java.lang.Math.pow(2,k))-(int)1; //2^k - 1
+        int inc = (int)(java.lang.Math.pow(2,k))-1; //2^k - 1
         while (inc <= a.length-1)
         {
             for (int i = inc; i<=a.length-1;i++)
@@ -252,16 +257,17 @@ public class Sorter
                 count++;
                 while ( j>=inc && a[j-inc]>temp)
                 {
-                    a[j] = a[j-inc];
-                    j = j - inc;
                     if(j!=i){
                         count++;
                     }
+                    a[j] = a[j-inc];
+                    j = j - inc;
+
                 }
                 a[j]=temp;
             }
             k++; 
-            inc = (int)(java.lang.Math.pow(2,k))-(int)1;
+            inc = (int)(java.lang.Math.pow(2,k))-1;
         }
         return count;
     }
@@ -301,19 +307,53 @@ public class Sorter
     //         return count;
     // }
 
+    //     /**
+    //      * shell Sedgewick Sort not working
+    //      * Fix go through loop to fix while statement
+    //      */
+    //     public int shellSedgewickW(int n){        
+    //         int k = 2;
+    //         int j;
+    //         int temp;
+    //         int count= 0;
+    //         int[] a = createListRand(n);
+    //         int inc = (int)((java.lang.Math.pow(4,k))- (3*(java.lang.Math.pow(2,k)))+1); 
+    //         while (inc <= a.length-1)
+    //         {
+    //             for (int i = inc; i<=a.length-1;i++)
+    //             {
+    //                 temp = a[i];
+    //                 j = i;
+    //                 count++;
+    //                 while ( j>=inc && a[j-inc]>temp)
+    //                 {
+    //                     if(j!=i){
+    //                         count++;
+    //                     }
+    //                     a[j] = a[j-inc];
+    //                     j = j - inc;
+    //                 }
+    //                 a[j]=temp;
+    //             }
+    //             k++; 
+    //             inc = (int)((java.lang.Math.pow(4,k))- (3*(java.lang.Math.pow(2,k)))+1);
+    //         }
+    //         return count;
+    //     }
+
     /**
-     * shell Sedgewick Sort not working
-     * Fix go through loop to fix while statement
+     * My Shell Sedgewick
+     * Working, with accurate count!
      */
-    public int shellSedgewick(int n){        
-        int k = 1;
-        int j;
-        int temp;
-        int count= 0;
+    public int shellSedgewick(int n){
+        int j, temp, inc;
+        count = 0;
         int[] a = createListRand(n);
-        int inc = (int)((java.lang.Math.pow(4,k))+ (3*java.lang.Math.pow(2,k+1)+1)); 
-        while (inc <= a.length+1)
+        int[] gaps = createGapsSedgewick(n);
+        int k = gaps.length - 1;
+        while (k >= 0)
         {
+            inc = gaps[k];
             for (int i = inc; i<=a.length-1;i++)
             {
                 temp = a[i];
@@ -321,67 +361,78 @@ public class Sorter
                 count++;
                 while ( j>=inc && a[j-inc]>temp)
                 {
-                    a[j] = a[j-inc];
-                    j = j - inc;
                     if(j!=i){
                         count++;
                     }
+                    a[j] = a[j-inc];
+                    j = j - inc;
                 }
                 a[j]=temp;
             }
-            k++; 
-            inc = (int)((java.lang.Math.pow(4,k))+ (3*java.lang.Math.pow(2,k+1)+1));
+            k--; 
         }
-        return count;
+        return count;    
     }
 
     /**
-     * shell Sedgewick not Gonnet
-     * Used as placeholder
+     *Shell Gonnet working
+     * Count working and ACCURATE
      */
     public int shellGonnet(int n){        
-        int k = 1;
-        int j;
-        int temp;
-        int count= 0;
+        int j, p, gap, tmp;
+        count = 0;
         int[] a = createListRand(n);
-        int inc = (int)((java.lang.Math.pow(4,k))+ (3*java.lang.Math.pow(2,k+1)+1)); 
-        while (inc <= a.length+1)
-        {
-            for (int i = inc; i<=a.length-1;i++)
+        for (gap = (int)(n/2.2); gap > 0; gap = (int)(gap/2.2))
+            for ( p = gap; p < n ; p++)
             {
-                temp = a[i];
-                j = i;
+                tmp = a[p];
                 count++;
-                while ( j>=inc && a[j-inc]>temp)
-                {
-                    a[j] = a[j-inc];
-                    j = j - inc;
-                    if(j!=i){
+                for (j = p; j >= gap && tmp < a[j- gap]; j -= gap){
+                    if(j!=p){
                         count++;
                     }
+                    a[j] = a[j-gap];
                 }
-                a[j]=temp;
+                a[j] = tmp;
             }
-            k++; 
-            inc = (int)((java.lang.Math.pow(4,k))+ (3*java.lang.Math.pow(2,k+1)+1));
-        }
         return count;
     }
+
+    //     public int shellHibbard(int n){        
+    //         int j, p, gap;
+    //         int tmp;
+    //         int count = 0;
+    //         int[] a = createListRand(n);
+    //         for (gap = 1; gap > 0; gap = (int)(java.lang.Math.pow(2,k)- 1)){
+    //             for ( p = gap; p < n ; p++)
+    //             {
+    //                 tmp = a[p];
+    //                 count++;
+    //                 for (j = p; j >= gap && tmp < a[j- gap]; j = j - gap){
+    //                     if(j!=p){
+    //                         count++;
+    //                     }
+    //                     a[j] = a[j-gap];
+    //                 }
+    //                 a[j] = tmp;
+    //             }
+    //         }
+    //       return count;
+    // }
 
     /**
      * shell knuth Sort Working
      * Fix go through loop to fix while statement
      * Too many Comparisons
      */
-    public int shellKnuth(int n){        
-        int k = 0;
+    public int shellKnuthW(int n){        
+        int k = 1;
         int j;
         int temp;
-        int count= 0;
+        count= 0;
         int[] a = createListRand(n);
         int inc = (int)((java.lang.Math.pow(3,k))-(int)1)/2; // (3^k -1) / 2
-        while (inc <= a.length+1)
+        while (inc <= a.length-1)
         {
             for (int i = inc; i<=a.length-1;i++)
             {
@@ -390,11 +441,12 @@ public class Sorter
                 count++;
                 while ( j>=inc && a[j-inc]>temp)
                 {
-                    a[j] = a[j-inc];
-                    j = j - inc;
                     if(j!=i){
                         count++;
                     }
+                    a[j] = a[j-inc];
+                    j = j - inc;
+
                 }
                 a[j]=temp;
             }
@@ -403,9 +455,40 @@ public class Sorter
         }
         return count;
     }
-
+    
+     /**
+     * Knuth
+     * Working, with accurate count!
+     */
+    public int shellKnuth(int n){
+        int j, temp, inc;
+        count = 0;
+        int[] a = createListRand(n);
+        int[] gaps = createGapsKnuth(n);
+        int k = gaps.length - 1;
+        while (k >= 0)
+        {
+            inc = gaps[k];
+            for (int i = inc; i<=a.length-1;i++)
+            {
+                temp = a[i];
+                j = i;
+                count++;
+                while ( j>=inc && a[j-inc]>temp)
+                {
+                    if(j!=i){
+                        count++;
+                    }
+                    a[j] = a[j-inc];
+                    j = j - inc;
+                }
+                a[j]=temp;
+            }
+            k--; 
+        }
+        return count;    
+    }
     private static int e;
-    private static int c;
     /**
      * heap sort ***Working but take away static variables
      * uses heapify method to create heap, maxheap to swap largest in heap
@@ -413,7 +496,7 @@ public class Sorter
      * @ret count = number of comparisons
      */
     public int heap(int n){
-        c = 0;
+        count = 0;
         intArray = createListRand(n);
         intArray = buildHeap(intArray);        
         for (int i = e; i > 0; i--)
@@ -423,7 +506,7 @@ public class Sorter
             maxheap(intArray, 0);
         }
 
-        return c;
+        return count;
     }
 
     public int[] buildHeap(int[] intArray)
@@ -441,13 +524,13 @@ public class Sorter
         int right = 2*i + 1;
         int max = i;
         if (left <= e){
-            c++;
+            count++;
             if( intArray[left] > intArray[i]){
                 max = left;
             }
         }
         if (right <= e )    {   
-            c++;
+            count++;
             if( intArray[right] > intArray[max]){
                 max = right;
             }
@@ -458,12 +541,18 @@ public class Sorter
             maxheap(intArray, max);
         }
     }    
-
-    private static int z = 0;
+    
+    public int quick1(int[] a, int p, int r){
+        count = 0;
+        quick(a,p,r);
+        return count;
+    }
+    
     /**
      * Quick Sort Working
      * Work around static variable
-     * Make a generic quick method
+     * Good count 
+     * Curiously, when used statically multiple times, returns greater than average counts
      */
     public static int quick(int[] a, int p, int r)
     {
@@ -473,7 +562,7 @@ public class Sorter
             quick(a,p,q);
             quick(a,q+1,r);
         }
-        return z;
+        return count;
     }
 
     private static int partition(int[] a, int p, int r) {
@@ -486,26 +575,30 @@ public class Sorter
             i++;
             while ( i< r && a[i] < x){
                 i++;
-                z++;
+                count++;
             }
             j--;
             while (j>p && a[j] > x){
                 j--;
-                z++;
+                count++;
             }
 
             if (i < j){
                 swap(a, i, j);
-                z++;
+                count++;
             }
             else{
-                z++;
+                count++;
                 return j;
             }
         }
     }
-
-    private static int y;
+    
+    public int mergeSort1(int[] data, int first, int n){
+        count = 0;
+        mergeSort(data, first, n);
+        return count;
+    }
     public int mergeSort(int[] data, int first, int n){
         int n1;
         int n2;
@@ -518,7 +611,7 @@ public class Sorter
 
             merge(data,first,n1,n2);
         }
-        return y;
+        return count;
     }
 
     public void merge(int[] data, int first, int n1, int n2){
@@ -528,7 +621,7 @@ public class Sorter
         int copied2 = 0;
         int i;
         while((copied1 < n1) && (copied2 < n2)){
-            y++;
+            count++;
             if (data[first + copied ] < data[first + n1 + copied2]){
                 temp[copied++] = data[first + copied1++];
             }else{
@@ -537,16 +630,23 @@ public class Sorter
         }
 
         while(copied1 < n1){
-            y ++;
+            count ++;
             temp[copied++] = data[first + (copied1++)];
         }
 
         for(i =0; i < copied; i++){
-            y ++;
+            count ++;
             data[first + i] = temp[i];
         }
     }
     //................Testing and Assisting Methods.............................//
+    /**
+     * method to restart count
+     */
+    public static void restartCount(){
+        count = 0;
+    }
+    
     /**
      * method to swap a and b
      */
@@ -717,6 +817,15 @@ public class Sorter
         System.out.println("Changes/Comparisons: " + count);
     }
 
+    public static void testShellGonnet(int n){
+        Sorter s = new Sorter();
+        int count = s.shellGonnet(n);
+        for(int i = 0; i < s.intArray.length; i++){
+            System.out.println(s.intArray[i]);
+        }
+        System.out.println("Changes/Comparisons: " + count);
+    }
+
     public static void testBuildHeap(){
         //int[] a = {6,8,7,1,5,3,2,4};
         Sorter s = new Sorter();
@@ -764,9 +873,11 @@ public class Sorter
     public static void testQuick(int n){
         Sorter s = new Sorter();
         int[] a = s.createListRand(n);
-        s.quick(a,0,n-1);
+        int count = s.quick1(a,0,n-1);
         for(int i = 0; i < a.length; i++){
             System.out.println(a[i]);
         }
+        System.out.println("Comparisons: " + count);
     }
+
 }
